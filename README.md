@@ -1,6 +1,6 @@
 # Markdown to Google Docs Converter for n8n
 
-A Firebase function that converts Markdown content to Google Docs format, specifically designed for n8n workflows. It seamlessly integrates with n8n's Google OAuth credentials and is perfect for converting LLM outputs into properly formatted Google Docs.
+A TypeScript/Express service that converts Markdown content to Google Docs format, specifically designed for n8n workflows. It seamlessly integrates with n8n's Google OAuth credentials and is perfect for converting LLM outputs into properly formatted Google Docs.
 
 ## Overview
 
@@ -41,15 +41,9 @@ Required headers:
 ### Self-Hosting
 You can also fork this repository and host it on your own infrastructure.
 
-## Demo
-
-Watch how the converter works in this demonstration:
-
-[![Markdown to Google Docs Converter Demo](https://img.youtube.com/vi/r2HdgJiCInA/0.jpg)](https://youtu.be/r2HdgJiCInA)
-
 ## Features
 
-- Serverless architecture using Firebase Functions
+- TypeScript/Express architecture
 - OAuth2 authentication for Google Docs API
 - Clean and consistent document formatting
 - Maintains document hierarchy and styling
@@ -63,11 +57,12 @@ Watch how the converter works in this demonstration:
 ```bash
 bun install
 ```
-3. Set up Firebase:
+3. Start the server:
 ```bash
-firebase login
-firebase init functions
+bun run dev
 ```
+
+The server will start on the default port (e.g., 3000). You can configure the port using the `PORT` environment variable.
 
 ## Usage in n8n
 
@@ -75,18 +70,14 @@ firebase init functions
 
 Add an HTTP Request node and configure it as follows:
 
-![HTTP Request Node Configuration](.github/assets/screen1.png)
-
 1. Method: `POST`
-2. URL: `https://md2doc.n8n.aemalsayer.com`
+2. URL: `http://localhost:3000/` (or your deployed endpoint)
 3. Authentication: 
    - Predefined Credential Type
    - Credential Type: `Google Docs OAuth2 API`
    - Select your Google Docs account
 
 ### 2. Configure Request Body
-
-![Request Body Configuration](.github/assets/screen2.png)
 
 Set up the body parameters:
 
